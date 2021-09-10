@@ -21,14 +21,16 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- mira >= 2.0.0 && < 2.1
+- containers >= 0.6.5.1 && < 6.6
 
 library:
   source-dirs: src
 
 executables:
-  union-exe:
+  union:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         src
     ghc-options:
     - -threaded
     - -rtsopts
