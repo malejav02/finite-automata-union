@@ -26,4 +26,3 @@ fa2 = MkFA (Set.fromList [4,5,6])
 
 main :: IO()
 main = print $ union fa1 fa2
-
