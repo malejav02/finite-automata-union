@@ -19,8 +19,8 @@ fa1 = MkFA (Set.fromList [1,2,3])
 
 -- Automaton accepting strings begining in 10
 fa2 :: FA Natural
-fa2 = MkFA (Set.fromList [1,2,3])
-           (Set.fromList[Move 1 '1' 2, Move 2 '0' 3, Move 3 '1' 3, Move 3 '0' 3])
+fa2 = MkFA (Set.fromList [4,5,6])
+           (Set.fromList[Move 4 '1' 5, Move 4 '0' 5, Move 6 '1' 6, Move 6 '0' 6])
            (1)
            (Set.fromList [3])
 
