@@ -27,6 +27,9 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options:
+    - -Wall
+    - -Wmissing-local-signatures
 
 executables:
   union:
@@ -40,10 +43,12 @@ executables:
     - union
 
 tests:
-  Lib-test:
-    main:                Runtest.hs
+  Union-test:
+    main:                RunTest.hs
     source-dirs:         test
     ghc-options:
+    - -Wall
+    - -Wmissing-local-signatures
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N

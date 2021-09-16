@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Union
 
 import Numeric.Natural (Natural)
 import Data.Set ( Set )                 --Test

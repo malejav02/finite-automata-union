@@ -25,12 +25,13 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
       Main
+      Union
   other-modules:
       Paths_union
   hs-source-dirs:
       src
+  ghc-options: -Wall -Wmissing-local-signatures
   build-depends:
       QuickCheck >=2.14.2 && <2.20.1
     , base >=4.7 && <5
@@ -41,7 +42,7 @@ library
 executable union
   main-is: Main.hs
   other-modules:
-      Lib
+      Union
       Paths_union
   hs-source-dirs:
       src
@@ -54,14 +55,14 @@ executable union
     , union
   default-language: Haskell2010
 
-test-suite Lib-test
+test-suite Union-test
   type: exitcode-stdio-1.0
-  main-is: Runtest.hs
+  main-is: RunTest.hs
   other-modules:
       Paths_union
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Wmissing-local-signatures -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck >=2.14.2 && <2.20.1
     , base >=4.7 && <5
