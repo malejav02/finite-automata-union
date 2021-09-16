@@ -17,6 +17,7 @@ import Data.Set (size)
 import qualified Data.Set as Set 
 --
  
+-- |The union function takes two finite automata and returns one finite automata, which is the union of the other two.
 union :: FA Natural -> FA Natural -> FA Natural
 union (MkFA statesFA1 transFA1 initialstateFA1 acceptingstatesFA1 )
       (MkFA statesFA2 transFA2 initialstateFA2 acceptingstatesFA2 )
@@ -25,32 +26,40 @@ union (MkFA statesFA1 transFA1 initialstateFA1 acceptingstatesFA1 )
                  (0)
                  (Set.fromList (newacceptingstate (statesmap (Set.toList statesFA1) 1) (Set.toList acceptingstatesFA1)++newacceptingstate (statesmap (Set.toList statesFA2) (fromIntegral (length statesFA1)+1)) (Set.toList acceptingstatesFA2))) 
                      
+-- |This function concatenates the accepting states of the two automatas that receives.
 acceptingstates :: [Natural] -> [Natural] -> [Natural]
 acceptingstates list1 list2 = list1 ++ list2
 
+-- |
 newacceptingstate:: (Map Natural Natural) -> [Natural]->[Natural]
 newacceptingstate map []=[]
 newacceptingstate   map (x:xs) = [map Map.! x]++ (newacceptingstate map xs)
             
+-- |This function receives the states of each automata and replace them with a list since 0 until
+-- the sum of the number of states of the two automata.
 newstates:: [Natural]-> [Natural]->[Natural]
-newstates estadosFA1 estadosFA2 = [0 .. (fromIntegral (length estadosFA1 + length estadosFA2))]
+newstates statesFA1 statesFA2 = [0 .. (fromIntegral (length statesFA1 + length statesFA2))]
 
+-- |This function receives the movements of the two automata and concatenates them is a list. 
 movementslist:: [Move Natural]-> [Move Natural]-> [Move Natural]
 movementslist movementsFA1 movementsFA2=  movementsFA1 ++ movementsFA2
 
+-- |This function receives a list with the automata states and  
 statesmap:: [Natural]-> Natural -> Map Natural Natural
 statesmap [] cont = Map.empty 
 statesmap (x:xs) cont = Map.insert x cont (statesmap xs (cont+1))
 
+-- |This function receives a list with th moves of the automata and a map 
 movements1:: [Move Natural] -> Map Natural Natural -> [Move Natural]
 movements1 [] map =[]
 movements1 (x:xs) map=  [movements2 x map ] ++ (movements1 xs map )
 
+-- |
 movements2 :: Move Natural -> Map Natural Natural -> Move Natural
 movements2 (Move state1 char state2) map = Move (map Map.! state1) char (map Map.! state2)
 movements2 (Emove state1 state2) map = Emove (map Map.! state1)  (map Map.! state2)
 
-
+-- |
 f :: [Natural] -> [Move Natural] -> Natural -> [Natural] -> [Move Natural] -> Natural -> [Move Natural]
 f states1 moves1 num1 states2 moves2 num2 = (movements1 moves1 (statesmap states1 1))++(movements1 moves2 (statesmap states2 ((fromIntegral (length states1)+1))))++[Emove 0 (((statesmap states1 1) Map.! num1)), Emove 0 (((statesmap states2 ((fromIntegral (length states1)+1))) Map.! num2))]
 
