@@ -20,9 +20,9 @@ fa1 = MkFA (Set.fromList [1,2,3])
 -- Automaton accepting strings begining in 10
 fa2 :: FA Natural
 fa2 = MkFA (Set.fromList [4,5,6])
-           (Set.fromList[Move 4 '1' 5, Move 4 '0' 5, Move 6 '1' 6, Move 6 '0' 6])
-           (1)
-           (Set.fromList [3])
+           (Set.fromList[Move 4 '1' 5, Move 5 '0' 6, Move 6 '1' 6, Move 6 '0' 6])
+           (4)
+           (Set.fromList [6])
 
 main :: IO()
 main = print $ union fa1 fa2

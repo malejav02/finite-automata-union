@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - mira >= 2.0.0 && < 2.1
 - containers >= 0.6.5.1 && < 6.6
+- QuickCheck >= 2.14.2 && < 2.20.1
 
 library:
   source-dirs: src
@@ -39,8 +40,8 @@ executables:
     - union
 
 tests:
-  union-test:
-    main:                Spec.hs
+  Lib-test:
+    main:                Runtest.hs
     source-dirs:         test
     ghc-options:
     - -threaded
