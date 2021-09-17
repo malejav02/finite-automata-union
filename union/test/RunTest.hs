@@ -24,6 +24,9 @@ instance Arbitrary Natural where
 main :: IO ()
 main = quickCheck $ (withMaxSuccess 1000 test)
 
+-- |The test function receives a word and two automata and returns a boolean. If the boolean 
+-- is true, means that the word is accepted by the language recognised by each automata and
+-- their union. In this function is used the union definition (||).
 test :: String 
            -> FA Natural
            -> FA Natural
