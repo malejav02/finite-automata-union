@@ -1,4 +1,4 @@
--- Representation of FA's union using functional programming in Haskell.
+-- Implementation of FA's union using functional programming in Haskell.
 
 -- Maria Alejandra Vélez Clavijo y Alejandra Palacio Jaramillo.
 
@@ -30,21 +30,23 @@ union (MkFA statesFA1 transFA1 initialstateFA1 acceptingstatesFA1 )
 acceptingstates :: [Natural] -> [Natural] -> [Natural]
 acceptingstates list1 list2 = list1 ++ list2
 
--- |
+-- |This function receives a map, a list of accepting states and returns a list with the
+-- associated values between the map and the list.
 newacceptingstate:: (Map Natural Natural) -> [Natural]->[Natural]
 newacceptingstate map []=[]
 newacceptingstate   map (x:xs) = [map Map.! x]++ (newacceptingstate map xs)
             
--- |This function receives the states of each automata and replace them with a list since 0 until
--- the sum of the number of states of the two automata.
+-- |This function receives the states of each automata and replace them with a list since 
+-- 0 until the sum of the number of states of the two automata.
 newstates:: [Natural]-> [Natural]->[Natural]
 newstates statesFA1 statesFA2 = [0 .. (fromIntegral (length statesFA1 + length statesFA2))]
 
--- |This function receives the movements of the two automata and concatenates them is a list. 
+-- |This function receives the transitions of the two automata and concatenates them is a list. 
 movementslist:: [Move Natural]-> [Move Natural]-> [Move Natural]
 movementslist movementsFA1 movementsFA2=  movementsFA1 ++ movementsFA2
 
--- |This function receives a list with the automata states and  
+-- |This function receives a list with the union automata states and a number that represents 
+-- an iterator
 statesmap:: [Natural]-> Natural -> Map Natural Natural
 statesmap [] cont = Map.empty 
 statesmap (x:xs) cont = Map.insert x cont (statesmap xs (cont+1))
